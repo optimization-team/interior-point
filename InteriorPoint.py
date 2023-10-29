@@ -5,7 +5,7 @@ import numpy as np
 
 
 @dataclass
-class SimplexSolution:
+class Solution:
     """
     Custom exception class for the Simplex algorithm. Contains solution for an optimization problem.
 
@@ -26,7 +26,7 @@ class SimplexSolution:
         )
 
 
-"""
+    """
     Interior point method implementation for calculating the optimal value of input vector for a given function and constraints.
     Attributes
     ----------
@@ -106,7 +106,7 @@ class InteriorPoint:
             next_solution = np.ndarray.tolist(np.transpose(d @ x_w))[0]
             accuracy = np.linalg.norm(np.subtract(self.solution, next_solution), ord=2)
             self.solution = next_solution
-        return SimplexSolution(self.solution, round(self.function(self.solution), self.eps))
+        return Solution(self.solution, round(self.function(self.solution), self.eps))
 
     def __str__(self):
         to_maximize = "max" if self.to_maximize else "min"
@@ -125,7 +125,7 @@ if __name__ == "__main__":
     b = np.array([16.0, 9.0])
     initial_solution = np.array([1 / 2, 7 / 2, 1, 2])
     approximation = 5
-    interior_point = InteriorPoint(function, constraints, b, initial_solution, approximation, False)
+    interior_point = InteriorPoint(function, constraints, b, initial_solution, approximation, True)
     print(interior_point)
     solution = interior_point.optimize()
     print(solution)
