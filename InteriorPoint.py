@@ -88,7 +88,7 @@ class InteriorPoint:
 
     def build_initial_solution(self) -> Solution:
         x = np.linalg.solve(self.A,self.b)
-        return Solution(x,round(self.function(vector=x),int(1/self.epsilon)))
+        return Solution(x,round(self.function(vector=x),self.eps))
 
     def optimize(self):
         if not self.to_maximize:
