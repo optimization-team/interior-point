@@ -4,6 +4,8 @@ Function class is used to store a linear function by given coefficients.
 """
 from __future__ import annotations
 
+from numpy import array
+
 
 class Function:
     """
@@ -43,7 +45,7 @@ class Function:
         if len(args) == 1 and (isinstance(args[0], list) or isinstance(args[0], tuple)):
             args = tuple(args[0])
 
-        if vector:
+        if vector is not None:
             args = tuple(vector)
         if len(args) != len(self.coefficients):
             raise ValueError("Input size does not match the size of the function")
@@ -74,3 +76,8 @@ if __name__ == '__main__':
     f.invert_sign()
     res = f(3, 2, 1)
     print(res)
+
+    a = array([1, 2, 3])
+    y = f(vector=a)
+    print(y)
+

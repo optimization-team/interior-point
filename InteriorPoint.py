@@ -66,13 +66,11 @@ class InteriorPoint:
             C: Function,
             A: np.array,
             b: np.array,
-            initial_solution: np.array,
             eps: int = 2,
             to_maximize=True,
             alpha: float = 0.5
     ):
         self.to_maximize = to_maximize
-        self.initial_solution = initial_solution
         self.function = C
         self.constraints_matrix = A
         self.C = np.array(C.coefficients)
@@ -80,33 +78,39 @@ class InteriorPoint:
         self.b = b
         self.eps = eps
         self.epsilon = 1 / (10 ** eps)
-        self.solution = np.array
         self.iteration = 0
         self.m, self.n = self.A.shape
         self.alfa = alpha
 
-    def build_initial_solution(self) -> np.array:
-        pass
+        self.initial_solution = self.build_initial_solution()
+        self.solution = self.initial_solution
+        print(self.solution)
+
+    def build_initial_solution(self) -> Solution:
+        x = np.linalg.solve(self.A,self.b)
+        return Solution(x,round(self.function(vector=x),int(1/self.epsilon)))
 
     def optimize(self):
-        self.solution = self.initial_solution
         if not self.to_maximize:
             coefficients = list(map(lambda x: -x, self.C))
         else:
             coefficients = np.copy(self.C)
         accuracy = float('inf')
+        cur_x = self.solution.x
         while accuracy > self.epsilon:
-            d = np.diag(self.solution)
+            print('cur_x:',cur_x)
+            d = np.diag(cur_x)
             a_w = self.A @ d
             c_w = d @ coefficients
             p = np.identity(self.n) - np.transpose(a_w) @ np.linalg.inv(a_w @ np.transpose(a_w)) * a_w
             c_p = p @ c_w
             v = np.absolute(np.min(c_p))
             x_w = np.transpose(np.array([1.] * self.n) + self.alfa / v * c_p)
-            next_solution = np.ndarray.tolist(np.transpose(d @ x_w))[0]
-            accuracy = np.linalg.norm(np.subtract(self.solution, next_solution), ord=2)
-            self.solution = next_solution
-        return Solution(self.solution, round(self.function(self.solution), self.eps))
+            next_x = np.transpose(d @ x_w)
+            accuracy = np.linalg.norm(np.subtract(cur_x, next_x), ord=2)
+            cur_x = next_x
+        self.solution = Solution(cur_x, round(self.function(cur_x), self.eps))
+        return self.solution
 
     def __str__(self):
         to_maximize = "max" if self.to_maximize else "min"
@@ -120,12 +124,12 @@ class InteriorPoint:
 
 
 if __name__ == "__main__":
-    function = Function([1, 1, 0, 0])
-    constraints = np.matrix([[2, 4, 1, 0], [1, 3, 0, -1]])
-    b = np.array([16.0, 9.0])
-    initial_solution = np.array([1 / 2, 7 / 2, 1, 2])
-    approximation = 5
-    interior_point = InteriorPoint(function, constraints, b, initial_solution, approximation, True)
+    function = Function([5, 4])
+    constraints = np.matrix([[1, 1], [0.75, 1]])
+    b = np.array([20, 18])
+    # initial_solution = np.array([1 / 2, 7 / 2, 1, 2])
+    approximation = 1
+    interior_point = InteriorPoint(function, constraints, b, approximation, True)
     print(interior_point)
     solution = interior_point.optimize()
     print(solution)
