@@ -91,6 +91,8 @@ class InteriorPoint:
         self.check_inputs()
 
     def check_inputs(self):
+        if not np.array_equal(np.array(np.dot(self.A, self.initial_solution)).flatten(), np.array(self.b)):
+            raise DivergenceException(self.initial_solution)
         if any(map(lambda x: x < 0, self.b)):
             raise InvalidRightVector(self.b)
 
