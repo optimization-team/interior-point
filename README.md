@@ -7,10 +7,10 @@ To test the program on your input, input the LPP into on of the files in [inputs
 - Enter right-hand side values of constraints.
 - Enter number of digits after decimal point (precision).
 - Enter initial solution for interior point algorithm (**with slack variables!**) 
-Specify the name of the file from [inputs](https://github.com/optimization-team/interior-point/tree/main/inputs) folder you want to use
-Check, if the results are what you expected.
 
-To execute automated tests for all test cases located in the 'tests' folder, run the 'pytest' command from the root directory.
+Specify the name of the file from [inputs](https://github.com/optimization-team/interior-point/tree/main/inputs) folder you want to use as an argument in parse_file() function in [main.py](https://github.com/optimization-team/interior-point/blob/main/main.py), line 20. Then, run the [main.py](https://github.com/optimization-team/interior-point/blob/main/main.py) file.
+
+Check, if the results are what you expected.
 ## Structure of the project
 ### [inputs](https://github.com/optimization-team/interior-point/tree/main/inputs)
 Folder, containing 7 different inputs, on which the program was tested.
