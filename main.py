@@ -6,11 +6,9 @@ from Function import Function
 
 
 def main():
-    from input_parser import parse_file
 
-    from input_parser import parse_file, parse_test
     print("InteriorPoint")
-    function, matrix, b, approximation, initial_solution = parse_file("inputs/input6.txt", initial_point=True)
+    function, matrix, b, approximation, initial_solution = parse_file("inputs/input1.txt", initial_point=True)
     interior_point = InteriorPoint(function, matrix, b, initial_solution, approximation, True)
 
     print(interior_point)
