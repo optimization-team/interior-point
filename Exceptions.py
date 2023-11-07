@@ -12,10 +12,10 @@ class InfeasibleSolution(Exception):
 class InvalidRightVector(Exception):
     def __init__(self, vector):
         super().__init__("Provided the invalid B vector")
-        print(vector)
+        self.vector = vector
 
 
 class DivergenceException(Exception):
     def __init__(self, point):
         super().__init__("Method fall into divergent point.")
-        print(point)
+        self.point = point

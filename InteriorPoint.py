@@ -114,10 +114,6 @@ class InteriorPoint:
             x_w = np.transpose(np.array([1.] * self.n) + self.alfa / v * c_p)
             next_solution = np.ndarray.tolist(np.transpose(d @ x_w))[0]
             accuracy = np.linalg.norm(np.subtract(self.solution, next_solution), ord=2)
-            if round(self.function(next_solution[:self.n - self.m]), self.eps) == round(
-                    self.function(self.solution[:self.n - self.m]), self.eps):
-                raise AlternatingOptima(Solution(next_solution[:self.n - self.m],
-                                                 round(self.function(self.solution[:self.n - self.m]), self.eps)))
             self.solution = next_solution
 
             if any(map(lambda x: x < 0, self.solution[:self.n - self.m])):
