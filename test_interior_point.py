@@ -30,11 +30,12 @@ class InteriorPointTestCase:
             function: Function,
             matrix: matrix,
             b: array,
+            initial_point: list[int],
             approximation: int | float,
             x: list[int],
             opt: int|float
     ):
-        self.interior_point = InteriorPoint(function, matrix, array(b), approximation)
+        self.interior_point = InteriorPoint(function, matrix, array(b), initial_point, approximation)
         self.correct_solution = Solution(array(x), float(opt))
         self.approximation = approximation
 
@@ -43,6 +44,7 @@ class InteriorPointTestCase:
             f"TestCase:\n{self.interior_point.C},\n"
             f"A:\n{self.interior_point.A},\n"
             f"b: {self.interior_point.b},\n"
+            f"initial_solution: {self.interior_point.initial_solution},\n"
             f"accuracy: {self.approximation},\n"
             +str(self.correct_solution)
         )
@@ -77,7 +79,7 @@ class TestInteriorPoint:
             path to test file
         """
 
-        testcase = InteriorPointTestCase(*parse_test(test_file))
+        testcase = InteriorPointTestCase(*parse_test(test_file, initial_point=True))
         solution = testcase.interior_point.optimize()
 
         for i, val in enumerate(solution.x):

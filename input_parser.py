@@ -12,7 +12,17 @@ from Function import Function
 from numpy import matrix, array
 
 
-def parse_file(filename: str):
+def parse_file(filename: str, initial_point=False):
+    """
+        Parse input file with optimal value and optimal vector
+
+        Parameters
+        ----------
+        filename: str
+            name of the file to parse
+        initial_point: bool
+            if True, parse initial point
+        """
     with open(filename) as file:
         function = Function(list(map(float, file.readline().split())))
         file.readline()
@@ -30,10 +40,15 @@ def parse_file(filename: str):
 
         approximation = int(file.readline().strip())
 
+        if initial_point:
+            file.readline()
+            initial_point = list(map(float, file.readline().split()))
+            return function, m, b, approximation, initial_point
+
         return function, m, b, approximation
 
 
-def parse_test(filename: str) -> tuple:
+def parse_test(filename: str, initial_point=False) -> tuple:
     """
     Parse test file with optimal value and optimal vector
 
@@ -41,8 +56,9 @@ def parse_test(filename: str) -> tuple:
     ----------
     filename: str
         name of the file to parse
+    initial_point: bool
+        if True, parse initial point
     """
-    # parse file + parse a vector of optimal values and optimal function value after -----
     with open(filename) as file:
         function = Function(list(map(float, file.readline().split())))
         file.readline()
@@ -60,14 +76,26 @@ def parse_test(filename: str) -> tuple:
 
         approximation = int(file.readline().strip())
 
+        # if initial_point:
+        #     file.readline()
+        #     initial_point = list(map(float, file.readline().split()))
+
         for _ in range(3):
             file.readline()
 
         fun = float(file.readline().strip())
         file.readline()
+
         x = list(map(float, file.readline().split()))
 
+        if initial_point:
+            file.readline()
+            initial_point = list(map(float, file.readline().split()))
+            return function, m, b, approximation, x, fun, initial_point
+
         return function, m, b, approximation, x, fun
+
+
 
 
 if __name__ == '__main__':

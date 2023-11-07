@@ -75,8 +75,10 @@ class InteriorPoint:
         self.initial_solution = initial_solution
         self.function = C
         self.constraints_matrix = A
-        self.C = np.array(C.coefficients)
-        self.A = A
+        # self.C = np.array(C.coefficients)
+        # self.A = A
+        self.C = np.hstack((np.array(C.coefficients), np.zeros(A.shape[0])))
+        self.A = np.hstack((A, np.identity(A.shape[0])))
         self.b = b
         self.eps = eps
         self.epsilon = 1 / (10 ** eps)
@@ -106,7 +108,12 @@ class InteriorPoint:
             next_solution = np.ndarray.tolist(np.transpose(d @ x_w))[0]
             accuracy = np.linalg.norm(np.subtract(self.solution, next_solution), ord=2)
             self.solution = next_solution
-        return Solution(self.solution, round(self.function(self.solution), self.eps))
+            # print(self.solution)
+            # take only first n-m elements
+
+            # print(self.solution)
+
+        return Solution(self.solution[:self.n - self.m], round(self.function(self.solution[:self.n - self.m]), self.eps))
 
     def __str__(self):
         to_maximize = "max" if self.to_maximize else "min"
@@ -120,12 +127,15 @@ class InteriorPoint:
 
 
 if __name__ == "__main__":
-    function = Function([1, 1, 0, 0])
-    constraints = np.matrix([[2, 4, 1, 0], [1, 3, 0, -1]])
-    b = np.array([16.0, 9.0])
-    initial_solution = np.array([1 / 2, 7 / 2, 1, 2])
-    approximation = 5
-    interior_point = InteriorPoint(function, constraints, b, initial_solution, approximation, True)
+    from input_parser import parse_file, parse_test
+
+    function, matrix, b, approximation, initial_solution = parse_file("inputs/input6.txt", initial_point=True)
+    # function, matrix, b, approximation, x, fun, initial_solution = parse_test("tests/test6.txt", initial_point=True)
+    # initial_solution1 = np.array([1 / 2, 7 / 2, 1, 2])
+    # parse initial solution
+    interior_point = InteriorPoint(function, matrix, b, initial_solution, approximation, True)
+
     print(interior_point)
     solution = interior_point.optimize()
     print(solution)
+
