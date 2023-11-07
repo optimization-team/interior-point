@@ -137,7 +137,7 @@ class InteriorPoint:
 if __name__ == "__main__":
     from input_parser import parse_file, parse_test
 
-    function, matrix, b, approximation, initial_solution = parse_file("inputs/input6.txt", initial_point=True)
+    function, matrix, b, approximation, initial_solution = parse_file("inputs/input5.txt", initial_point=True)
     # function, matrix, b, approximation, x, fun, initial_solution = parse_test("tests/test6.txt", initial_point=True)
     # initial_solution1 = np.array([1 / 2, 7 / 2, 1, 2])
     # parse initial solution
