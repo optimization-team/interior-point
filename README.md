@@ -14,8 +14,6 @@ Check, if the results are what you expected.
 ## Structure of the project
 ### [inputs](https://github.com/optimization-team/interior-point/tree/main/inputs)
 Folder, containing 7 different inputs, on which the program was tested.
-### [tests](https://github.com/optimization-team/interior-point/tree/main/tests)
-Folder, containing 6 different inputs and correct answers for those inputs, on which the program was tested.
 ### [Exceptions.py](https://github.com/optimization-team/interior-point/blob/main/Exceptions.py)
 File containing Exceptions which Simplex and Interior Point classes can raise.
 ### [Function.py](https://github.com/optimization-team/interior-point/blob/main/Function.py)
@@ -34,5 +32,3 @@ File containing functions parsing input into format, needed for the Simplex clas
 File, from which the program can be tested on the input from certain file from [inputs](https://github.com/optimization-team/interior-point/tree/main/inputs) folder.
 ### [requirements.txt](https://github.com/optimization-team/interior-point/blob/main/requirements.txt)
 Information about assets needed for the program to be executed correctly.
-### [test_interior_point.py](https://github.com/optimization-team/interior-point/blob/main/test_interior_point.py)
-File containing the classes and functions needed to test the program on the tests, given in "tests" folder.
