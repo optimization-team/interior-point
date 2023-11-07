@@ -1,23 +1,19 @@
 # Programing task 2, "Introduction to optimization"
 
 ## How to test the program on your LPP
-To test the program on your input, run the main.py file.
-- Choose, if you want to input the LPP from console or from file.
-- Choose, if your LPP is maximization or minimization.
-- Choose, if you want intermidiate steps of solution to be printed.
-- If you chose input from console
-  - Enter objective value coefficients, separated by space, in one line.
-  - Enter coefficients of constraints, line by line. Print "done" when finished.
-  - Enter right-hand side values of constraints.
-  - Enter number of digits after decimal point (precision).
-  - Enter initial solution for interior point algorithm (**with slack variables!**) 
-- If you chose input from file, specify the name of the file from [inputs](https://github.com/optimization-team/interior-point/tree/main/inputs) folder you want to use
-- Check, if the results are what you expected.
+To test the program on your input, input the LPP into on of the files in [inputs](https://github.com/optimization-team/interior-point/tree/main/inputs) folder.
+- Enter objective value coefficients, separated by space, in one line.
+- Enter coefficients of constraints, line by line.
+- Enter right-hand side values of constraints.
+- Enter number of digits after decimal point (precision).
+- Enter initial solution for interior point algorithm (**with slack variables!**) 
 
-To execute automated tests for all test cases located in the 'tests' folder, run the 'pytest' command from the root directory.
+Specify the name of the file from [inputs](https://github.com/optimization-team/interior-point/tree/main/inputs) folder you want to use as an argument in parse_file() function in [main.py](https://github.com/optimization-team/interior-point/blob/main/main.py), line 20. Then, run the [main.py](https://github.com/optimization-team/interior-point/blob/main/main.py) file.
+
+Check, if the results are what you expected.
 ## Structure of the project
 ### [inputs](https://github.com/optimization-team/interior-point/tree/main/inputs)
-Folder, containing 6 different inputs, on which the program was tested.
+Folder, containing 7 different inputs, on which the program was tested.
 ### [tests](https://github.com/optimization-team/interior-point/tree/main/tests)
 Folder, containing 6 different inputs and correct answers for those inputs, on which the program was tested.
 ### [Exceptions.py](https://github.com/optimization-team/interior-point/blob/main/Exceptions.py)
@@ -35,8 +31,8 @@ File containing the Simplex method. Contains the following classes:
 ### [input_parser.py](https://github.com/optimization-team/interior-point/blob/main/input_parser.py)
 File containing functions parsing input into format, needed for the Simplex class.
 ### [main.py](https://github.com/optimization-team/interior-point/blob/main/main.py)
-File, from which the program can be tested on the input from console or from certain file from [inputs](https://github.com/optimization-team/interior-point/tree/main/inputs) folder.
-### [requirements.py](https://github.com/optimization-team/interior-point/blob/main/requirements.txt)
+File, from which the program can be tested on the input from certain file from [inputs](https://github.com/optimization-team/interior-point/tree/main/inputs) folder.
+### [requirements.txt](https://github.com/optimization-team/interior-point/blob/main/requirements.txt)
 Information about assets needed for the program to be executed correctly.
 ### [test_interior_point.py](https://github.com/optimization-team/interior-point/blob/main/test_interior_point.py)
 File containing the classes and functions needed to test the program on the tests, given in "tests" folder.
