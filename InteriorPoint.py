@@ -3,6 +3,8 @@ from dataclasses import dataclass
 from Function import Function
 import numpy as np
 
+from Exceptions import AlternatingOptima
+
 
 @dataclass
 class Solution:
@@ -26,41 +28,39 @@ class Solution:
         )
 
 
-    """
-    Interior point method implementation for calculating the optimal value of input vector for a given function and constraints.
-    Attributes
-    ----------
-        Initial variables:
-        ------------------
-        function: Function
-
-        constraints_matrix: np.array
-
-        C: np.array
-            function with slack variables
-
-        A: np.array
-            matrix of constraints (assumed that all given in the form of inequalities) with slack variables
-
-        b: np.array
-            right hand side column vector (size n x 1)
-
-        eps: int
-            approximation of an answer (number of digits after comma)
-
-        m: int
-            number of constraints
-
-        n: int
-            number of variables
-            
-        alpha: float
-            distance that could be moved before the feasible region is left.
-            0 < alpha < 1
-"""
-
-
 class InteriorPoint:
+    """
+        Interior point method implementation for calculating the optimal value of input vector for a given function and constraints.
+        Attributes
+        ----------
+            Initial variables:
+            ------------------
+            function: Function
+
+            constraints_matrix: np.array
+
+            C: np.array
+                function with slack variables
+
+            A: np.array
+                matrix of constraints (assumed that all given in the form of inequalities) with slack variables
+
+            b: np.array
+                right hand side column vector (size n x 1)
+
+            eps: int
+                approximation of an answer (number of digits after comma)
+
+            m: int
+                number of constraints
+
+            n: int
+                number of variables
+
+            alpha: float
+                distance that could be moved before the feasible region is left.
+                0 < alpha < 1
+    """
     def __init__(
             self,
             C: Function,
@@ -108,13 +108,9 @@ class InteriorPoint:
             x_w = np.transpose(np.array([1.] * self.n) + self.alfa / v * c_p)
             next_solution = np.ndarray.tolist(np.transpose(d @ x_w))[0]
             accuracy = np.linalg.norm(np.subtract(self.solution, next_solution), ord=2)
+            if round(self.function(next_solution[:self.n - self.m]), self.eps) == round(self.function(self.solution[:self.n - self.m]), self.eps):
+                raise AlternatingOptima(Solution(next_solution[:self.n - self.m], round(self.function(self.solution[:self.n - self.m]), self.eps)))
             self.solution = next_solution
-            # except RuntimeWarning:
-            #     break
-                # print(self.solution)
-            # take only first n-m elements
-
-            # print(self.solution)
 
         return Solution(self.solution[:self.n - self.m], round(self.function(self.solution[:self.n - self.m]), self.eps))
 

@@ -2,6 +2,7 @@ from dataclasses import dataclass
 import numpy as np
 import termtables as tt
 from Function import Function
+from Exceptions import AlternatingOptima
 
 
 @dataclass
@@ -31,10 +32,10 @@ class InfeasibleSolution(Exception):
         super().__init__("Infeasible solution, method is not applicable!")
 
 
-class AlternatingOptima(Exception):
-    def __init__(self, solution):
-        super().__init__("Alternating optima detected!")
-        self.solution = solution
+# class AlternatingOptima(Exception):
+#     def __init__(self, solution):
+#         super().__init__("Alternating optima detected!")
+#         self.solution = solution
 
 
 class Simplex:

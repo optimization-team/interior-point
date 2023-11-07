@@ -2,7 +2,8 @@ import argparse
 import numpy
 import warnings
 from InteriorPoint import InteriorPoint
-from Simplex import Simplex, InfeasibleSolution, AlternatingOptima
+from Simplex import Simplex, InfeasibleSolution
+from Exceptions import AlternatingOptima
 from input_parser import parse_file
 numpy.seterr(all='warn')
 
@@ -16,6 +17,9 @@ def print_interior_point_algorithm(interior_point: InteriorPoint):
         print(solution)
     except Warning:
         print("SOLUTION:\nThe problem does not have solution!")
+    except AlternatingOptima as e:
+        print(e.solution)
+        print("Alternating optima detected")
     print("\n")
 
 
