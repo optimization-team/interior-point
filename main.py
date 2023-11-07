@@ -2,11 +2,11 @@ import argparse
 import numpy
 import warnings
 from InteriorPoint import InteriorPoint
-from Simplex import Simplex, InfeasibleSolution
-from Exceptions import AlternatingOptima
+from Simplex import Simplex
+from Exceptions import AlternatingOptima, InfeasibleSolution
 from input_parser import parse_file
-numpy.seterr(all='warn')
 
+numpy.seterr(all='warn')
 warnings.filterwarnings("error", category=RuntimeWarning)
 
 
@@ -25,7 +25,7 @@ def print_interior_point_algorithm(interior_point: InteriorPoint):
 
 def main():
     print("InteriorPoint")
-    function, matrix, b, approximation, initial_solution = parse_file("inputs/input6.txt", initial_point=True)
+    function, matrix, b, approximation, initial_solution = parse_file("inputs/input7.txt", initial_point=True)
     print_interior_point_algorithm(
         InteriorPoint(function, matrix, b, initial_solution, approximation, True, 0.5)
     )
