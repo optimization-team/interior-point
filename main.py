@@ -21,7 +21,7 @@ def print_interior_point_algorithm(interior_point: InteriorPoint):
 
 def main():
     print("InteriorPoint")
-    function, matrix, b, approximation, initial_solution = parse_file("inputs/input7.txt", initial_point=True)
+    function, matrix, b, approximation, initial_solution = parse_file("inputs/input6.txt", initial_point=True)
     print_interior_point_algorithm(
         InteriorPoint(function, matrix, b, initial_solution, approximation, True, 0.5)
     )
