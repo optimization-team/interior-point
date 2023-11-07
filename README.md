@@ -32,7 +32,7 @@ File containing the Simplex method. Contains the following classes:
 File containing functions parsing input into format, needed for the Simplex class.
 ### [main.py](https://github.com/optimization-team/interior-point/blob/main/main.py)
 File, from which the program can be tested on the input from certain file from [inputs](https://github.com/optimization-team/interior-point/tree/main/inputs) folder.
-### [requirements.py](https://github.com/optimization-team/interior-point/blob/main/requirements.txt)
+### [requirements.txt](https://github.com/optimization-team/interior-point/blob/main/requirements.txt)
 Information about assets needed for the program to be executed correctly.
 ### [test_interior_point.py](https://github.com/optimization-team/interior-point/blob/main/test_interior_point.py)
 File containing the classes and functions needed to test the program on the tests, given in "tests" folder.
