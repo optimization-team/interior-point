@@ -15,7 +15,7 @@ def print_interior_point_algorithm(interior_point: InteriorPoint):
         solution = interior_point.optimize()
         print(solution)
     except Warning:
-        print("SOLUTION:\nThe method is not applicable!")
+        print("SOLUTION:\nThe problem does not have solution!")
     print("\n")
 
 
@@ -35,7 +35,7 @@ def main():
         solution = simplex.optimise(print_iterations=False)
         print(solution)
     except InfeasibleSolution:
-        print("SOLUTION:\nThe method is not applicable!")
+        print("SOLUTION:\nThe problem does not have solution!")
     except AlternatingOptima as e:
         print(e.solution)
         print("Alternating optima detected")
