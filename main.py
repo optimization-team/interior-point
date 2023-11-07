@@ -17,7 +17,7 @@ def print_interior_point_algorithm(interior_point: InteriorPoint):
 
 def main():
     print("InteriorPoint")
-    function, matrix, b, approximation, initial_solution = parse_file("inputs/input2.txt", initial_point=True)
+    function, matrix, b, approximation, initial_solution = parse_file("inputs/input5.txt", initial_point=True)
     try:
         print_interior_point_algorithm(
             InteriorPoint(function, matrix, b, initial_solution, approximation, True, 0.5)
@@ -40,8 +40,8 @@ def main():
 
     try:
         print_interior_point_algorithm(
-        InteriorPoint(function, matrix, b, initial_solution, approximation, True, 0.9)
-    )
+            InteriorPoint(function, matrix, b, initial_solution, approximation, True, 0.9)
+        )
     except InvalidRightVector as e:
         print("The method is not applicable!")
         print(f"Invalid b vector: {e.vector}")
