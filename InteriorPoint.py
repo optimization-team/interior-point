@@ -116,7 +116,7 @@ class InteriorPoint:
             accuracy = np.linalg.norm(np.subtract(self.solution, next_solution), ord=2)
             if round(self.function(next_solution[:self.n - self.m]), self.eps) == round(
                     self.function(self.solution[:self.n - self.m]), self.eps):
-                raise AlternatingOptima(Solution(next_solution[:self.n - self.m],
+                raise AlternatingOptima(Solution([round(i, self.eps) for i in next_solution[:self.n - self.m]],
                                                  round(self.function(self.solution[:self.n - self.m]), self.eps)))
             self.solution = next_solution
 
@@ -141,7 +141,7 @@ class InteriorPoint:
 if __name__ == "__main__":
     from input_parser import parse_file, parse_test
 
-    function, matrix, b, approximation, initial_solution = parse_file("inputs/input6.txt", initial_point=True)
+    function, matrix, b, approximation, initial_solution = parse_file("inputs/input5.txt", initial_point=True)
     # function, matrix, b, approximation, x, fun, initial_solution = parse_test("tests/test6.txt", initial_point=True)
     # initial_solution1 = np.array([1 / 2, 7 / 2, 1, 2])
     # parse initial solution
