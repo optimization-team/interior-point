@@ -96,8 +96,6 @@ def parse_test(filename: str, initial_point=False) -> tuple:
         return function, m, b, approximation, x, fun
 
 
-
-
 if __name__ == '__main__':
     f, m, b, a, x, opt = parse_test('tests/test1.txt')
     # f, m, b, a = parse_file('inputs/input1.txt')

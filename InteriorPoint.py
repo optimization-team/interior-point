@@ -77,8 +77,6 @@ class InteriorPoint:
         self.initial_solution = initial_solution
         self.function = C
         self.constraints_matrix = A
-        # self.C = np.array(C.coefficients)
-        # self.A = A
         self.C = np.hstack((np.array(C.coefficients), np.zeros(A.shape[0])))
         self.A = np.hstack((A, np.identity(A.shape[0])))
         self.b = b
