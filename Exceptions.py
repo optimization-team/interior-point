@@ -6,3 +6,7 @@ class AlternatingOptima(Exception):
 class InfeasibleSolution(Exception):
     def __init__(self):
         super().__init__("Infeasible solution, method is not applicable!")
+
+class InvalidRightVector(Exception):
+    def __init__(self):
+        super().__init__("Invalid right vector, method is not applicable!")
