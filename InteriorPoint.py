@@ -98,6 +98,7 @@ class InteriorPoint:
             coefficients = np.copy(self.C)
         accuracy = float('inf')
         while accuracy > self.epsilon:
+            # try:
             d = np.diag(self.solution)
             a_w = self.A @ d
             c_w = d @ coefficients
@@ -108,7 +109,9 @@ class InteriorPoint:
             next_solution = np.ndarray.tolist(np.transpose(d @ x_w))[0]
             accuracy = np.linalg.norm(np.subtract(self.solution, next_solution), ord=2)
             self.solution = next_solution
-            # print(self.solution)
+            # except RuntimeWarning:
+            #     break
+                # print(self.solution)
             # take only first n-m elements
 
             # print(self.solution)
