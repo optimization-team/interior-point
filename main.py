@@ -1,28 +1,36 @@
+import argparse
+
 from InteriorPoint import InteriorPoint
-import numpy as np
-from Simplex import Simplex
+from Simplex import Simplex, InfeasibleSolution, AlternatingOptima
 from input_parser import parse_file
-from Function import Function
+
+
+def print_interior_point_algorithm(interior_point: InteriorPoint):
+    print(interior_point)
+    print(interior_point.optimize())
+    print("\n")
 
 
 def main():
-
     print("InteriorPoint")
-    function, matrix, b, approximation, initial_solution = parse_file("inputs/input7.txt", initial_point=True)
-    interior_point = InteriorPoint(function, matrix, b, initial_solution, approximation, True)
-    np.set_printoptions(precision=approximation)
-
-    print(interior_point)
-    solution = interior_point.optimize()
-    print(solution)
-    print("\n")
+    function, matrix, b, approximation, initial_solution = parse_file("inputs/input1.txt", initial_point=True)
+    print_interior_point_algorithm(
+        InteriorPoint(function, matrix, b, initial_solution, approximation, True, 0.5)
+    )
+    print_interior_point_algorithm(
+        InteriorPoint(function, matrix, b, initial_solution, approximation, True, 0.9)
+    )
     print("Simplex")
     simplex = Simplex(function, matrix, b, approximation, True)
     print(simplex)
-
-    solution = simplex.optimise(print_iterations=False)
-    print(solution)
-
+    try:
+        solution = simplex.optimise(print_iterations=False)
+        print(solution)
+    except InfeasibleSolution:
+        print("SOLUTION:\nThe method is not applicable!")
+    except AlternatingOptima as e:
+        print(e.solution)
+        print("Alternating optima detected")
 
 
 if __name__ == "__main__":

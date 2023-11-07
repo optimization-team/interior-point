@@ -123,7 +123,8 @@ class InteriorPoint:
         constraints = constraints[:-1]
         constraints = constraints.replace("[[", "|").replace("]]", "|")
         approximation = f"Approximation: {self.eps}"
-        return f"LPP:\n{self.function} -> {to_maximize}\n{constraints}\n{approximation}\n"
+        alpha = f"Alpha: {self.alfa}"
+        return f"LPP:\n{self.function} -> {to_maximize}\n{constraints}\n{approximation}\n{alpha}\n"
 
 
 if __name__ == "__main__":
