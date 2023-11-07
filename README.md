@@ -1,23 +1,19 @@
 # Programing task 2, "Introduction to optimization"
 
 ## How to test the program on your LPP
-To test the program on your input, run the main.py file.
-- Choose, if you want to input the LPP from console or from file.
-- Choose, if your LPP is maximization or minimization.
-- Choose, if you want intermidiate steps of solution to be printed.
-- If you chose input from console
-  - Enter objective value coefficients, separated by space, in one line.
-  - Enter coefficients of constraints, line by line. Print "done" when finished.
-  - Enter right-hand side values of constraints.
-  - Enter number of digits after decimal point (precision).
-  - Enter initial solution for interior point algorithm (**with slack variables!**) 
-- If you chose input from file, specify the name of the file from [inputs](https://github.com/optimization-team/interior-point/tree/main/inputs) folder you want to use
-- Check, if the results are what you expected.
+To test the program on your input, input the LPP into on of the files in [inputs](https://github.com/optimization-team/interior-point/tree/main/inputs) folder.
+- Enter objective value coefficients, separated by space, in one line.
+- Enter coefficients of constraints, line by line.
+- Enter right-hand side values of constraints.
+- Enter number of digits after decimal point (precision).
+- Enter initial solution for interior point algorithm (**with slack variables!**) 
+Specify the name of the file from [inputs](https://github.com/optimization-team/interior-point/tree/main/inputs) folder you want to use
+Check, if the results are what you expected.
 
 To execute automated tests for all test cases located in the 'tests' folder, run the 'pytest' command from the root directory.
 ## Structure of the project
 ### [inputs](https://github.com/optimization-team/interior-point/tree/main/inputs)
-Folder, containing 6 different inputs, on which the program was tested.
+Folder, containing 7 different inputs, on which the program was tested.
 ### [tests](https://github.com/optimization-team/interior-point/tree/main/tests)
 Folder, containing 6 different inputs and correct answers for those inputs, on which the program was tested.
 ### [Exceptions.py](https://github.com/optimization-team/interior-point/blob/main/Exceptions.py)
