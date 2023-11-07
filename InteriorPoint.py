@@ -3,21 +3,8 @@ from dataclasses import dataclass
 from Function import Function
 import numpy as np
 
-from Exceptions import AlternatingOptima, InfeasibleSolution, InvalidRightVector
-
-
-# class InfeasibleSolution(Exception):
-#     def __init__(self):
-#         super().__init__("Infeasible solution, method is not applicable!")
-
-
-# class AlternatingOptima(Exception):
-#     def __init__(self, solution):
-#         super().__init__("Alternating optima detected!")
-#         self.solution = solution
-
-
-
+from Exceptions import (AlternatingOptima, InfeasibleSolution,
+                        InvalidRightVector, DivergenceException)
 
 
 @dataclass
@@ -129,6 +116,9 @@ class InteriorPoint:
             if round(self.function(next_solution[:self.n - self.m]), self.eps) == round(self.function(self.solution[:self.n - self.m]), self.eps):
                 raise AlternatingOptima(Solution(next_solution[:self.n - self.m], round(self.function(self.solution[:self.n - self.m]), self.eps)))
             self.solution = next_solution
+
+            if any(map(lambda x: x < 0, self.solution[:self.n - self.m])):
+                raise DivergenceException(self.solution[:self.n - self.m])
 
         return Solution(self.solution[:self.n - self.m],
                         round(self.function(self.solution[:self.n - self.m]), self.eps))

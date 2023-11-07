@@ -2,7 +2,7 @@ from dataclasses import dataclass
 import numpy as np
 import termtables as tt
 from Function import Function
-from Exceptions import AlternatingOptima, InfeasibleSolution
+from Exceptions import AlternatingOptima, InfeasibleSolution, InvalidRightVector
 
 
 @dataclass
@@ -25,15 +25,6 @@ class SimplexSolution:
             f"Vector of decision variables: ({', '.join(map(str, self.x))}),\n"
             f"Optimal value: {self.opt}"
         )
-
-
-
-
-
-class InvalidRightVector(Exception):
-    def __init__(self, vector):
-        super().__init__("Provided the invalid B vector")
-        print(vector)
 
 
 class Simplex:

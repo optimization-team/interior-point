@@ -3,10 +3,19 @@ class AlternatingOptima(Exception):
         super().__init__("Alternating optima detected!")
         self.solution = solution
 
+
 class InfeasibleSolution(Exception):
     def __init__(self):
         super().__init__("Infeasible solution, method is not applicable!")
 
+
 class InvalidRightVector(Exception):
-    def __init__(self):
-        super().__init__("Invalid right vector, method is not applicable!")
+    def __init__(self, vector):
+        super().__init__("Provided the invalid B vector")
+        print(vector)
+
+
+class DivergenceException(Exception):
+    def __init__(self, point):
+        super().__init__("Method fall into divergent point.")
+        print(point)
