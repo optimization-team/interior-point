@@ -4,6 +4,23 @@ from Function import Function
 import numpy as np
 
 
+class InfeasibleSolution(Exception):
+    def __init__(self):
+        super().__init__("Infeasible solution, method is not applicable!")
+
+
+class AlternatingOptima(Exception):
+    def __init__(self, solution):
+        super().__init__("Alternating optima detected!")
+        self.solution = solution
+
+
+class InvalidRightVector(Exception):
+    def __init__(self, vector):
+        super().__init__("Provided the invalid B vector")
+        print(vector)
+
+
 @dataclass
 class Solution:
     """
@@ -24,7 +41,6 @@ class Solution:
             f"Vector of decision variables: ({', '.join(map(str, self.x))}),\n"
             f"Optimal value: {self.opt}"
         )
-
 
     """
     Interior point method implementation for calculating the optimal value of input vector for a given function and constraints.
@@ -86,6 +102,11 @@ class InteriorPoint:
         self.iteration = 0
         self.m, self.n = self.A.shape
         self.alfa = alpha
+        self.check_inputs()
+
+    def check_inputs(self):
+        if any(map(lambda x: x < 0, self.b)):
+            raise InvalidRightVector(self.b)
 
     def build_initial_solution(self) -> np.array:
         pass
@@ -113,7 +134,8 @@ class InteriorPoint:
 
             # print(self.solution)
 
-        return Solution(self.solution[:self.n - self.m], round(self.function(self.solution[:self.n - self.m]), self.eps))
+        return Solution(self.solution[:self.n - self.m],
+                        round(self.function(self.solution[:self.n - self.m]), self.eps))
 
     def __str__(self):
         to_maximize = "max" if self.to_maximize else "min"
@@ -139,4 +161,3 @@ if __name__ == "__main__":
     print(interior_point)
     solution = interior_point.optimize()
     print(solution)
-

@@ -37,6 +37,12 @@ class AlternatingOptima(Exception):
         self.solution = solution
 
 
+class InvalidRightVector(Exception):
+    def __init__(self, vector):
+        super().__init__("Provided the invalid B vector")
+        print(vector)
+
+
 class Simplex:
     """
     Main simplex class made for calculating the optimal value of input vector for a given function and constraints.
@@ -124,6 +130,12 @@ class Simplex:
         self.delta = 0.0
         self.C_B_mul_B_inv = np.zeros(self.m)
         self.iteration = 0
+
+        self.check_inputs()
+
+    def check_inputs(self):
+        if any(map(lambda x: x < 0, self.b)):
+            raise InvalidRightVector(self.b)
 
     def __str__(self):
         to_maximize = "max" if self.to_maximize else "min"
