@@ -62,6 +62,7 @@ class InteriorPoint:
                 distance that could be moved before the feasible region is left.
                 0 < alpha < 1
     """
+
     def __init__(
             self,
             C: Function,
@@ -113,14 +114,16 @@ class InteriorPoint:
             x_w = np.transpose(np.array([1.] * self.n) + self.alfa / v * c_p)
             next_solution = np.ndarray.tolist(np.transpose(d @ x_w))[0]
             accuracy = np.linalg.norm(np.subtract(self.solution, next_solution), ord=2)
-            if round(self.function(next_solution[:self.n - self.m]), self.eps) == round(self.function(self.solution[:self.n - self.m]), self.eps):
-                raise AlternatingOptima(Solution(next_solution[:self.n - self.m], round(self.function(self.solution[:self.n - self.m]), self.eps)))
+            if round(self.function(next_solution[:self.n - self.m]), self.eps) == round(
+                    self.function(self.solution[:self.n - self.m]), self.eps):
+                raise AlternatingOptima(Solution(next_solution[:self.n - self.m],
+                                                 round(self.function(self.solution[:self.n - self.m]), self.eps)))
             self.solution = next_solution
 
             if any(map(lambda x: x < 0, self.solution[:self.n - self.m])):
                 raise DivergenceException(self.solution[:self.n - self.m])
 
-        return Solution(self.solution[:self.n - self.m],
+        return Solution([round(i, self.eps) for i in self.solution[:self.n - self.m]],
                         round(self.function(self.solution[:self.n - self.m]), self.eps))
 
     def __str__(self):
