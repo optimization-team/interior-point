@@ -3,7 +3,21 @@ from dataclasses import dataclass
 from Function import Function
 import numpy as np
 
-from Exceptions import AlternatingOptima
+from Exceptions import AlternatingOptima, InfeasibleSolution, InvalidRightVector
+
+
+# class InfeasibleSolution(Exception):
+#     def __init__(self):
+#         super().__init__("Infeasible solution, method is not applicable!")
+
+
+# class AlternatingOptima(Exception):
+#     def __init__(self, solution):
+#         super().__init__("Alternating optima detected!")
+#         self.solution = solution
+
+
+
 
 
 @dataclass
@@ -86,6 +100,11 @@ class InteriorPoint:
         self.iteration = 0
         self.m, self.n = self.A.shape
         self.alfa = alpha
+        self.check_inputs()
+
+    def check_inputs(self):
+        if any(map(lambda x: x < 0, self.b)):
+            raise InvalidRightVector(self.b)
 
     def build_initial_solution(self) -> np.array:
         pass
@@ -98,7 +117,6 @@ class InteriorPoint:
             coefficients = np.copy(self.C)
         accuracy = float('inf')
         while accuracy > self.epsilon:
-            # try:
             d = np.diag(self.solution)
             a_w = self.A @ d
             c_w = d @ coefficients
@@ -112,7 +130,8 @@ class InteriorPoint:
                 raise AlternatingOptima(Solution(next_solution[:self.n - self.m], round(self.function(self.solution[:self.n - self.m]), self.eps)))
             self.solution = next_solution
 
-        return Solution(self.solution[:self.n - self.m], round(self.function(self.solution[:self.n - self.m]), self.eps))
+        return Solution(self.solution[:self.n - self.m],
+                        round(self.function(self.solution[:self.n - self.m]), self.eps))
 
     def __str__(self):
         to_maximize = "max" if self.to_maximize else "min"
@@ -138,4 +157,3 @@ if __name__ == "__main__":
     print(interior_point)
     solution = interior_point.optimize()
     print(solution)
-
