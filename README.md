@@ -31,7 +31,7 @@ File containing the Simplex method. Contains the following classes:
 ### [input_parser.py](https://github.com/optimization-team/interior-point/blob/main/input_parser.py)
 File containing functions parsing input into format, needed for the Simplex class.
 ### [main.py](https://github.com/optimization-team/interior-point/blob/main/main.py)
-File, from which the program can be tested on the input from console or from certain file from [inputs](https://github.com/optimization-team/interior-point/tree/main/inputs) folder.
+File, from which the program can be tested on the input from certain file from [inputs](https://github.com/optimization-team/interior-point/tree/main/inputs) folder.
 ### [requirements.py](https://github.com/optimization-team/interior-point/blob/main/requirements.txt)
 Information about assets needed for the program to be executed correctly.
 ### [test_interior_point.py](https://github.com/optimization-team/interior-point/blob/main/test_interior_point.py)
