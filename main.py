@@ -16,7 +16,7 @@ def main():
     print(interior_point)
     solution = interior_point.optimize()
     print(solution)
-
+    print("\n")
     print("Simplex")
     simplex = Simplex(function, matrix, b, approximation, True)
     print(simplex)
