@@ -25,12 +25,14 @@ def print_interior_point_algorithm(interior_point: InteriorPoint):
 
     except DivergenceException:
         print("Method fall into divergent point.")
+    except Exception as e:
+        print(e)
     print("\n")
 
 
 def main():
     print("InteriorPoint")
-    function, matrix, b, approximation, initial_solution = parse_file("inputs/input6.txt", initial_point=True)
+    function, matrix, b, approximation, initial_solution = parse_file("inputs/input1.txt", initial_point=True)
     print_interior_point_algorithm(
         InteriorPoint(function, matrix, b, initial_solution, approximation, True, 0.5)
     )
@@ -50,6 +52,8 @@ def main():
         print("Alternating optima detected")
     except InvalidRightVector as e:
         print("The method is not applicable!")
+    except Exception as e:
+        print(e)
 
 
 if __name__ == "__main__":
