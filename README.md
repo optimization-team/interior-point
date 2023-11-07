@@ -20,6 +20,8 @@ To execute automated tests for all test cases located in the 'tests' folder, run
 Folder, containing 6 different inputs, on which the program was tested.
 ### [tests](https://github.com/optimization-team/interior-point/tree/main/tests)
 Folder, containing 6 different inputs and correct answers for those inputs, on which the program was tested.
+### [Exceptions.py](https://github.com/optimization-team/interior-point/blob/main/Exceptions.py)
+File containing Exceptions which Simplex and Interior Point classes can raise.
 ### [Function.py](https://github.com/optimization-team/interior-point/blob/main/Function.py)
 File containing a Function class. This class is used to store the objective function for the LPP.
 ### [InteriorPoint.py](https://github.com/optimization-team/interior-point/blob/main/InteriorPoint.py)
@@ -29,7 +31,6 @@ File containing the Interior Point method. Contains the following classes:
 ### [Simplex.py](https://github.com/optimization-team/interior-point/blob/main/Simplex.py)
 File containing the Simplex method. Contains the following classes:
 - SimplexSolution - class, used to store the solution for the LPP.
-- InfeasibleSolution - exception, thrown when there is no feasible solution.
 - Simplex - class, responsible for calculating the LPP using the Simplex method.
 ### [input_parser.py](https://github.com/optimization-team/interior-point/blob/main/input_parser.py)
 File containing functions parsing input into format, needed for the Simplex class.
