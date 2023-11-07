@@ -21,6 +21,12 @@ class InvalidRightVector(Exception):
         print(vector)
 
 
+class DivergenceException(Exception):
+    def __init__(self, point):
+        super().__init__("Method fall into divergent point.")
+        print(point)
+
+
 @dataclass
 class Solution:
     """
@@ -129,10 +135,9 @@ class InteriorPoint:
             next_solution = np.ndarray.tolist(np.transpose(d @ x_w))[0]
             accuracy = np.linalg.norm(np.subtract(self.solution, next_solution), ord=2)
             self.solution = next_solution
-            # print(self.solution)
-            # take only first n-m elements
 
-            # print(self.solution)
+            if any(map(lambda x: x < 0, self.solution[:self.n - self.m])):
+                raise DivergenceException(self.solution[:self.n - self.m])
 
         return Solution(self.solution[:self.n - self.m],
                         round(self.function(self.solution[:self.n - self.m]), self.eps))
